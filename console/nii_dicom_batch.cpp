@@ -3636,9 +3636,12 @@ int nii_saveNII3Deq(char * niiFilename, struct nifti_1_header hdr, unsigned char
         printMessage("Only able to make equidistant slices from 8,16,24-bit integer or 32-bit float data with at least 3 slices.");
         return EXIT_FAILURE;
     }
-    printMessage("hdr.dim[3] %d", hdr.dim[3]);
+    printMessage("filename %s\n", niiFilename);
+    printMessage("hdr.dim[3] %d\n", hdr.dim[3]);
+    printMessage("Slice %d: %f\n", 0, sliceMMarray[0]);
     float mn = sliceMMarray[1] - sliceMMarray[0];
     for (int i = 1; i < hdr.dim[3]; i++) {
+      printMessage("Slice %d: %f\n", i, sliceMMarray[i]);
     	float dx = sliceMMarray[i] - sliceMMarray[i-1];
         if ((dx < mn) && (!isSameFloat(dx, 0.0))) // <- allow slice direction to reverse
             mn = sliceMMarray[i] - sliceMMarray[i-1];
